@@ -1,52 +1,90 @@
-import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import OpenAI from 'openai'
 
- 
-// Create an OpenAI API client
+// Initialize OpenAI client
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
- 
-// IMPORTANT! Set the runtime to edge
-export const runtime = 'edge';
- 
-export async function POST(req: Request, res: Response) {  // Remove the res parameter as it's not needed
-    // Extract the `prompt` from the body of the request
-    const { messages } = await req.json();
-    console.log('messages:', messages);
- 
-    // Ask OpenAI for a streaming chat completion given the prompt
+  apiKey: process.env.OPENAI_API_KEY
+})
+
+const systemInstruction = `You are a Personal Finance Advisor with expertise in:
+- Budgeting and expense tracking
+- Investment strategies and portfolio management
+- Debt management and reduction
+- Retirement planning
+- Tax optimization
+- Emergency fund planning
+
+Provide practical, actionable financial advice tailored to individual circumstances.
+Best suited for personal finance questions, budget reviews, and investment guidance.
+Keep responses under 500 characters while maintaining clarity and value.
+Do not provide specific investment recommendations or legal advice.`
+
+export async function POST(req: Request) {
+  try {
+    // Parse and log the incoming request body
+    const json = await req.json()
+    const { messages } = json
+    console.log('Incoming messages:', messages)
+
+    // Validate the messages array
+    if (!messages || !Array.isArray(messages)) {
+      console.error('Invalid messages format')
+      return new Response('Messages array is required', { status: 400 })
+    }
+
+    const fullMessages = [
+      { role: 'system', content: systemInstruction },
+      ...messages
+    ]
+    console.log('Full messages with system instruction:', fullMessages)
+
+    // Create the completion stream
+    console.log('Creating OpenAI completion stream...')
     const response = await openai.chat.completions.create({
-        model: "gpt-4-1106-preview",
-        messages: [
-            {
-                role: 'system',
-                content: "You are a Personal Finance Advisor, which is a virtual assistant designed to help users manage their money, set financial goals, and make informed financial decisions. You provide personalized insights, budgeting strategies, and investment guidance based on the user's financial situation. " +  
+      model: 'gpt-3.5-turbo',
+      messages: fullMessages,
+      stream: true,
+      temperature: 0.7,
+      max_tokens: 500
+    })
 
-                "Your Capabilities are:" +  
-                "Budgeting Assistance: Helps users track income and expenses, offering suggestions to optimize spending. " +  
-                "Investment Guidance: Provides general investment knowledge, risk assessment, and portfolio diversification strategies. " +  
-                "Debt Management: Offers strategies for reducing debt, managing credit scores, and optimizing loan repayments. " +  
-                "Savings & Goal Setting: Assists users in setting and achieving financial goals, such as buying a home, saving for education, or retirement planning. " +  
-                "Financial Education: Explains key financial concepts in an easy-to-understand way. " +  
-                "Expense Analysis: Detects spending patterns and suggests ways to save more effectively. " +  
+    // Create a readable stream from the OpenAI response
+    const stream = new ReadableStream({
+      async start(controller) {
+        const encoder = new TextEncoder()
+        let fullResponse = ''
 
-                "Your Ideal Use Cases are:" +  
-                "Users seeking to improve their financial literacy. " +  
-                "Individuals looking for budgeting and savings strategies. " +  
-                "Investors who need basic guidance on portfolio management. " +  
-                "Anyone wanting AI-driven financial insights tailored to their needs. " +
-                "Your replies are under 500 characters."
-            },
-            ...messages,
-        ],
-        stream: true,
-        temperature: 1
-    });
- 
-    // Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response);
-    
-    // Respond with the stream
-    return new StreamingTextResponse(stream);
+        for await (const chunk of response) {
+          const content = chunk.choices[0]?.delta?.content || ''
+          if (content) {
+            fullResponse += content
+            console.log('Chunk received:', content)
+            
+            // Format as Server-Sent Event
+            const data = JSON.stringify({ content, fullResponse })
+            const message = `data: ${data}\n\n`
+            controller.enqueue(encoder.encode(message))
+          }
+        }
+        controller.close()
+      }
+    })
+
+    // Return the stream with appropriate headers
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      }
+    })
+  } catch (error) {
+    console.error('Error in chat completion:', error)
+    return new Response(
+      JSON.stringify({ error: 'An error occurred while processing your request' }), 
+      { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  }
 }
