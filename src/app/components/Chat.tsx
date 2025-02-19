@@ -1,5 +1,6 @@
 import { use, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import './Chat.css';
 
 const Chat = () => {
     const [messages, setMessages] = useState<Array<{ role: string; content: string; id: string }>>([]);

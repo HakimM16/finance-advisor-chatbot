@@ -1,0 +1,85 @@
+.Chat {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    padding-bottom: 80px; /* Space for the form */
+    background-color: #13111C;
+  }
+  
+  .response {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .chat-line {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+  
+  .user-chat {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .ai-chat {
+    background-color: transparent;
+  }
+  
+  .avatar {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+  }
+  
+  .message {
+    color: white;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .horizontal-line {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+  }
+  
+  .mainForm {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 20px;
+    background-color: #13111C;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .mainForm input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .mainForm input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .mainButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: #FFB800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
