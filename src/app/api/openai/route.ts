@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     // Create the completion stream
     console.log('Creating OpenAI completion stream...')
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: fullMessages,
       stream: true,
       temperature: 0.7,
