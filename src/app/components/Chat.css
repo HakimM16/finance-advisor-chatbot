@@ -7,6 +7,8 @@
     padding-bottom: 80px; /* Space for the form */
     background-color: #13111C;
   }
+
+
   
   .response {
     display: flex;
@@ -20,13 +22,16 @@
     align-items: flex-start;
     padding: 10px 20px;
   }
+
   
   .user-chat {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #221d35 ;
+    border-radius: 8px;
   }
   
   .ai-chat {
-    background-color: transparent;
+    background-color: #1c1635 ;
+    border-radius: 8px;
   }
   
   .avatar {
@@ -39,6 +44,8 @@
     color: white;
     margin: 0;
     line-height: 1.5;
+    font-family: var(--font-oswald);
+    font-size: 20px;
   }
   
   .horizontal-line {
@@ -50,12 +57,17 @@
   .mainForm {
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 25%;
+    right: 25%;
     display: flex;
-    padding: 20px;
-    background-color: #13111C;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 20px;
+    width: 50%;
   }
   
   .mainForm input {
@@ -64,22 +76,35 @@
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: rgba(255, 255, 255, 0.05);
-    color: white;
+    color: black;
     margin-right: 10px;
+  }
+
+  .mainForm input:focus {
+    outline: none;
   }
   
   .mainForm input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: black;
   }
   
   .mainButton {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 20px;
     border: none;
-    background-color: #FFB800;
+    background-color: #b18a27;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 10px;
+    font-weight: 900;
+    font-size: larger;
+  }
+
+  .mainButton:hover {
+    background-color: #f5be18;
+    transition: background-color 1s ease-in-out;
+
   }

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className='App'>
       <div className="container">
-        <div className="header">
+        <div className="header" style={{ border: '2px solid white' }}>
           <Image src='/images/logo.png' alt='logo' width={100} height={100} />
         </div>
         <Chat />

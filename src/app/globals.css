@@ -5,6 +5,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-anton: var(--font-anton);
+  --font-comfortaa: var(--font-comfortaa);
+  --font-oswald: var(--font-oswald);
+  --font-outfit: var(--font-outfit);
+  --font-roboto-condensed: var(--font-roboto-condensed);
+  --font-sigmar: var(--font-sigmar);
+  --font-teko: var(--font-teko);
 }
 
 @media (prefers-color-scheme: dark) {

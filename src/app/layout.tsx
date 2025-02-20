@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Anton, Comfortaa, Oswald, Outfit, Roboto_Condensed, Sigmar, Teko } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +10,43 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const anton = Anton({
+  weight: '400',
+  variable: '--font-anton',
+  subsets: ['latin'],
+});
+
+const comfortaa = Comfortaa({
+  variable: '--font-comfortaa',
+  subsets: ['latin'],
+});
+
+const oswald = Oswald({
+  variable: '--font-oswald',
+  subsets: ['latin'],
+});
+
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+});
+
+const robotoCondensed = Roboto_Condensed({
+  variable: '--font-roboto-condensed',
+  subsets: ['latin'],
+});
+
+const sigmar = Sigmar({
+  weight: '400',
+  variable: '--font-sigmar',
+  subsets: ['latin'],
+});
+
+const teko = Teko({
+  variable: '--font-teko',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${comfortaa.variable} ${oswald.variable} ${outfit.variable} ${robotoCondensed.variable} ${sigmar.variable} ${teko.variable} antialiased`}
       >
         {children}
       </body>
