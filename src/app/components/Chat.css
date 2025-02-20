@@ -93,7 +93,7 @@
     height: 40px;
     border-radius: 20px;
     border: none;
-    background-color: #b18a27;
+    background-color: #f5be18;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -104,7 +104,7 @@
   }
 
   .mainButton:hover {
-    background-color: #f5be18;
+    background-color: #ffd24d;
     transition: background-color 1s ease-in-out;
 
   }
