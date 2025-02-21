@@ -99,7 +99,7 @@ const Chat = () => {
                         <Image 
                             className='avatar' 
                             alt='avatar' 
-                            src={m.role === 'user' ? '/images/user-avatar.png' : '/images/lcb-avatar.png'} 
+                            src={m.role === 'user' ? '/images/shadow_avatar.png' : '/images/finance_bot_avatar.png'} 
                             width={100} 
                             height={100}
                         />

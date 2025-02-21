@@ -1,5 +1,6 @@
 'use client';
 import './styles.css';
+import styles from './styles.module.css'
 
 import Image from 'next/image';
 import Chat from './components/Chat';
@@ -7,10 +8,10 @@ import Chat from './components/Chat';
 export default function Home() {
   return (
     <main className='App'>
-      <div className="container">
-        <div className="header" style={{ border: '2px solid white' }}>
-          <Image src='/images/logo.png' alt='logo' width={100} height={100} />
+        <div className="header">
+          <Image src='/images/finance_advisor_logo.png' alt='logo' width={120} height={120} className={styles.logo_image}/>
         </div>
+      <div className="container">
         <Chat />
       </div>
     </main>
