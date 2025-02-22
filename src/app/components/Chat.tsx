@@ -1,11 +1,10 @@
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import './Chat.css';
 
 const Chat = () => {
     const [messages, setMessages] = useState<Array<{ role: string; content: string; id: string }>>([]);
     const [input, setInput] = useState('');
-    const [bgColour, setbgColour] = useState('#13111C');
     const chatContainer = useRef<HTMLDivElement>(null);
     
     const scroll = () => {
@@ -31,7 +30,6 @@ const Chat = () => {
         };
         setMessages(prev => [...prev, userMessage]);
         setInput('');
-        // setbgColour('#25213a');
 
         try {
             const response = await fetch('/api/openai', {
@@ -48,7 +46,7 @@ const Chat = () => {
 
             const reader = response.body?.getReader();
             const decoder = new TextDecoder();
-            let assistantMessage = {
+            const assistantMessage = {
                 role: 'assistant',
                 content: '',
                 id: (Date.now() + 1).toString()
@@ -114,7 +112,7 @@ const Chat = () => {
     }
 
     return (
-        <div ref={chatContainer} className="Chat" style={{ backgroundColor: bgColour, transition: 'background-color 3s' }}>
+        <div ref={chatContainer} className="Chat" style={{ backgroundColor: '#13111C', transition: 'background-color 3s' }}>
             {renderResponse()}
             <form onSubmit={handleSubmit} className="mainForm">
                 <input 
