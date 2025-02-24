@@ -14,3 +14,9 @@
 .slogan_image {
     margin-right: 10px;
 }
+
+@media screen and (max-width: 500px) {
+    .logo_image, .slogan_image {
+        display: none;
+    }
+}

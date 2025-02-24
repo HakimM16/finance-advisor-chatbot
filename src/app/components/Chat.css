@@ -108,7 +108,12 @@
   }
 
   .mainButton:hover {
-    background-color: #ffd24d;
+    background-color: #f2873b;
     transition: background-color 1s ease-in-out;
-
   }
+
+@media screen and (max-width: 500px) {
+  .mainForm {
+    width: 250px;
+  }
+}
