@@ -1,8 +1,16 @@
-.logo_image {
+.logo_image, .slogan_image {
     border-radius: 20px;
     transition: transform 0.2s;
 }
 
-.logo_image:hover {
+.logo_image:hover, .slogan_image:hover {
     transform: scale(1.1);
+}
+
+.logo_image {
+    margin-left: 10px;
+}
+
+.slogan_image {
+    margin-right: 10px;
 }
