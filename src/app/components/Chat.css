@@ -79,10 +79,12 @@
     color: black;
     margin-right: 10px;
     border: none;
+    font-family: var(--font-oswald);
   }
 
   .mainForm input:focus {
     outline: none;
+    font-family: var(--font-oswald);
   }
   
   .mainForm input::placeholder {
