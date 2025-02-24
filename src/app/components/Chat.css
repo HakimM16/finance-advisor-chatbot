@@ -78,6 +78,7 @@
     background-color: rgba(255, 255, 255, 0.05);
     color: black;
     margin-right: 10px;
+    border: none;
   }
 
   .mainForm input:focus {
@@ -86,6 +87,7 @@
   
   .mainForm input::placeholder {
     color: black;
+    font-family: var(--font-oswald);
   }
   
   .mainButton {
